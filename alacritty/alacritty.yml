@@ -1,0 +1,57 @@
+# Doesn't seem to work
+window:
+  opacity: 1
+
+font:
+  normal:
+    family: JetBrainsMonoNL Nerd Font
+    style: Regular
+  bold:
+    family: JetBrainsMonoNL Nerd Font
+    style: Bold
+  italic:
+    family: JetBrainsMonoNL Nerd Font
+    style: Italic
+  bold_italic:
+    family: JetBrainsMonoNL Nerd Font
+    style: Bold Italic
+  size: 16.0
+
+colors:
+  primary:
+    foreground: '#ECE1D7'
+    background: '#292522'
+  normal:
+    black:   '#34302C'
+    red:     '#BD8183'
+    green:   '#78997A'
+    yellow:  '#E49B5D'
+    blue:    '#7F91B2'
+    magenta: '#B380B0'
+    cyan:    '#7B9695'
+    white:   '#C1A78E'
+  bright:
+    black:   '#867462'
+    red:     '#D47766'
+    green:   '#85B695'
+    yellow:  '#EBC06D'
+    blue:    '#A3A9CE'
+    magenta: '#CF9BC2'
+    cyan:    '#89B3B6'
+    white:   '#ECE1D7'
+
+key_bindings:
+  - { key: Key0, mods: Alt, action: None }
+  - { key: Key1, mods: Alt, action: None }
+  - { key: Key2, mods: Alt, action: None }
+  - { key: Key3, mods: Alt, action: None }
+  - { key: Key4, mods: Alt, action: None }
+  - { key: Key5, mods: Alt, action: None }
+  - { key: Key6, mods: Alt, action: None }
+  - { key: Key7, mods: Alt, action: None }
+  - { key: Key8, mods: Alt, action: None }
+  - { key: Key9, mods: Alt, action: None }
+  - { key: H,    mods: Alt, action: None }
+  - { key: J,    mods: Alt, action: None }
+  - { key: K,    mods: Alt, action: None }
+  - { key: L,    mods: Alt, action: None }
