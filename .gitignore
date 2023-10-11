@@ -3,4 +3,3 @@ systemd/
 tmux/plugins/
 
 alacritty_example.yml
-*.json
