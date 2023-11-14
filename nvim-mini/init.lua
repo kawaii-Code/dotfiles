@@ -23,4 +23,13 @@ keymap.set('n', '>', '>>')
 keymap.set('n', '<', '<<')
 keymap.set('n', '<leader>h', '<CMD>nohlsearch<CR>')
 
-vim.cmd.colorscheme('koehler')
+vim.cmd.colorscheme('monotone')
+
+local Plug = vim.fn['plug#']
+
+vim.call('plug#begin', '~/.config/nvim/plugged')
+
+Plug 'jiangmiao/auto-pairs'
+Plug 'tpope/vim-surround'
+
+vim.call('plug#end')
