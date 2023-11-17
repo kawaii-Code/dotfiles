@@ -9,6 +9,7 @@ set autoread
 filetype plugin indent on
 
 set langmap=ФИСВУАПРШОЛДЬТЩЗЙКЫЕГМЦЧНЯ;ABCDEFGHIJKLMNOPQRSTUVWXYZ,фисвуапршолдьтщзйкыегмцчня;abcdefghijklmnopqrstuvwxyz
+set timeout timeoutlen=5000 ttimeoutlen=100
 
 set mouse=a
 set termguicolors
