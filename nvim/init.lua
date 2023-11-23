@@ -38,6 +38,7 @@ map.set('n', '<leader>dp', vim.diagnostic.goto_prev)
 -- Plugins
 --
 
+
 local Plug = vim.fn['plug#']
 vim.call('plug#begin', '~/AppData/Local/nvim-data/plugged')
 
@@ -107,7 +108,7 @@ local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
 local function on_attach(event)
     vim.bo[event.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
-    local opts = {buffer = event.buf}
+    local options = {buffer = event.buf}
     map.set('n', 'gd', vim.lsp.buf.definition, options)
     map.set('n', 'gi', vim.lsp.buf.implementation, options)
     map.set('n', 'gr', vim.lsp.buf.references, options)
@@ -130,7 +131,7 @@ lspconfig.rust_analyzer.setup({capabilities = capabilities})
 lspconfig.pyright.setup({capabilities = capabilities})
 lspconfig.gopls.setup({capabilities = capabilities})
 lspconfig.zls.setup({capabilities = capabilities})
---lspconfig.lua_ls.setup({})
-    --capabilities = capabilities,
-    --settings = {Lua = {telemetry = {enable = false}}},
---})
+lspconfig.lua_ls.setup({
+    capabilities = capabilities,
+    settings = {Lua = {telemetry = {enable = false}}},
+})
