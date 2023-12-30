@@ -1,0 +1,137 @@
+# i3 config file (v4)
+
+set $mod Mod1
+set $win Mod4
+
+font pango:JetBrainsMonoNL Nerd Font,JetBrainsMonoNL NF:style=Regular 9
+
+floating_modifier $mod
+
+floating_maximum_size 1920x1080
+tiling_drag modifier titlebar
+title_align center
+smart_borders on
+
+set $background #292522
+set $foreground #ECE1D7
+set $gray0 #111111
+set $gray1 #222222
+set $gray2 #403A36
+set $gray3 #888888
+
+# class                 border  backgr.     text        indicator   child_border
+client.focused          $gray2  $background $foreground $foreground $background
+client.unfocused        $gray1  $gray0      $gray3      $gray3      $gray0
+
+bar {
+        padding 2px 0
+        colors {
+                background $gray0
+                separator  $gray2
+                statusline $foreground
+                focused_workspace $gray2 $background $foreground
+                inactive_workspace $gray0 $gray0 $gray3
+        }
+        position top
+        status_command i3status
+        separator_symbol "|"
+}
+
+bindsym $mod+Return exec alacritty
+bindsym $mod+c exec flameshot gui
+bindsym $win+s exec "rofi -modi drun, run -show drun"
+
+bindsym $mod+Shift+q kill
+bindsym $mod+Tab workspace back_and_forth
+bindsym $mod+q layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+bindsym $mod+r fullscreen toggle
+bindsym $mod+Shift+space floating toggle
+bindsym $mod+space focus mode_toggle
+bindsym $mod+Shift+c reload
+bindsym $win+period exec rofimoji
+
+set $resize_mode "Resize: h, j, k, l"
+bindsym $win+r mode $resize_mode
+mode $resize_rode {
+        bindsym h resize shrink width 10 px or 10 ppt
+        bindsym j resize grow height 10 px or 10 ppt
+        bindsym k resize shrink height 10 px or 10 ppt
+        bindsym l resize grow width 10 px or 10 ppt
+
+        bindsym Left resize shrink width 10 px or 10 ppt
+        bindsym Down resize grow height 10 px or 10 ppt
+        bindsym Up resize shrink height 10 px or 10 ppt
+        bindsym Right resize grow width 10 px or 10 ppt
+
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+        bindsym $mod+q mode "default"
+}
+
+set $system_mode "System: [s]uspend, [r]eboot, [p]oweroff, [e]xit i3"
+bindsym $win+e mode $system_mode
+mode $system_mode {
+        bindsym s exec --no-startup-id systemctl suspend; mode "default"
+        bindsym r exec --no-startup-id systemctl reboot;
+        bindsym p exec --no-startup-id shutdown;
+        bindsym e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"; mode "default"
+
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+        bindsym $win+e mode "default"
+}
+
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
+
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
+
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+set $ws5 "5"
+set $ws6 "6"
+set $ws7 "7"
+set $ws8 "8"
+set $ws9 "9"
+set $ws10 "10"
+
+bindsym $mod+1 workspace number $ws1
+bindsym $mod+2 workspace number $ws2
+bindsym $mod+3 workspace number $ws3
+bindsym $mod+4 workspace number $ws4
+bindsym $mod+5 workspace number $ws5
+bindsym $mod+6 workspace number $ws6
+bindsym $mod+7 workspace number $ws7
+bindsym $mod+8 workspace number $ws8
+bindsym $mod+9 workspace number $ws9
+bindsym $mod+0 workspace number $ws10
+
+bindsym $mod+Shift+1 move container to workspace number $ws1
+bindsym $mod+Shift+2 move container to workspace number $ws2
+bindsym $mod+Shift+3 move container to workspace number $ws3
+bindsym $mod+Shift+4 move container to workspace number $ws4
+bindsym $mod+Shift+5 move container to workspace number $ws5
+bindsym $mod+Shift+6 move container to workspace number $ws6
+bindsym $mod+Shift+7 move container to workspace number $ws7
+bindsym $mod+Shift+8 move container to workspace number $ws8
+bindsym $mod+Shift+9 move container to workspace number $ws9
+bindsym $mod+Shift+0 move container to workspace number $ws10
