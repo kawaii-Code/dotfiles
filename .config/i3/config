@@ -75,7 +75,7 @@ bindsym $win+e mode $system_mode
 mode $system_mode {
         bindsym s exec --no-startup-id systemctl suspend; mode "default"
         bindsym r exec --no-startup-id systemctl reboot;
-        bindsym p exec --no-startup-id shutdown;
+        bindsym p exec --no-startup-id poweroff;
         bindsym e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"; mode "default"
 
         bindsym Return mode "default"

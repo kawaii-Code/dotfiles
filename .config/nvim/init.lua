@@ -40,7 +40,7 @@ map.set('n', '<leader>dp', vim.diagnostic.goto_prev)
 
 
 local Plug = vim.fn['plug#']
-vim.call('plug#begin', '~/AppData/Local/nvim-data/plugged')
+vim.call('plug#begin', '~/.local/share/nvim/plugged')
 
 Plug 'nvim-lua/plenary.nvim'
 Plug('nvim-telescope/telescope.nvim', {branch = '0.1.x'})

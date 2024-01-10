@@ -1,7 +1,5 @@
 set nocompatible
 set belloff=all
-set smarttab
-set nrformats-=octal
 
 set hlsearch
 set ignorecase
@@ -12,19 +10,21 @@ set wildmenu
 set autoread
 set ttyfast
 
-set timeout timeoutlen=5000 ttimeoutlen=100
-
 set mouse=a
 set termguicolors
 set showcmd
-set lazyredraw
 set number
 set relativenumber
 set scrolloff=8
 set nowrap
 set list
-set listchars=tab:>\ ,trail:`
+set listchars=tab:󱦰\ ,trail:`
 set backspace=indent,eol,start
+
+set smarttab
+set tabstop=4
+set shiftwidth=4
+set expandtab
 
 filetype plugin indent on
 syntax on
@@ -36,18 +36,3 @@ let g:mapleader=' '
 nnoremap < <<
 nnoremap > >>
 nnoremap <leader>h :nohl<CR>
-
-call plug#begin()
-Plug 'junegunn/goyo.vim'
-Plug 'preservim/vim-pencil'
-call plug#end()
-
-function! Text()
-	Goyo 81
-	nnoremap q :qa<CR>
-	nnoremap Q :qa!<CR>
-endfunction
-
-augroup Writing
-  autocmd FileType text call Text()
-augroup END
