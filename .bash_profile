@@ -3,7 +3,7 @@
 export CDPATH=.:$HOME:..
 export PATH=$HOME/app:$PATH
 
-export EDITOR="vim -S $HOME/.vimdistractionfree"
+export EDITOR=vim
 export VISUAL=$EDITOR
 
 export PYTHONSTARTUP="$HOME/.pythonrc.py"
