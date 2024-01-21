@@ -1,4 +1,4 @@
-# credits: https://zserge.com/posts/vim-distraction-free/
+" credits: https://zserge.com/posts/vim-distraction-free/
 
 let dfm_width = 80
 let dfm_height = 0.8

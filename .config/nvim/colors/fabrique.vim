@@ -1,6 +1,6 @@
 highlight! clear 
 
-highlight! Normal guibg=#161316 guifg=#D8D0D8 ctermbg=232 ctermfg=232 
+highlight! Normal guibg=#1C1C1C guifg=#EBDBB2 ctermbg=0 ctermfg=0
 highlight! Visual guibg=fg      guifg=bg      ctermbg=0   ctermfg=0
 
 " Code
@@ -25,7 +25,7 @@ highlight! link PmenuSbar PmenuSel
 
 highlight! Search    guibg=#A0A8A0 guifg=bg      ctermbg=0   ctermfg=0
 highlight! IncSearch guibg=bg      guifg=#DDA0A0 ctermbg=0   ctermfg=0
-highlight! link MatchParen IncSearch
+highlight! link MatchParen Todo
 
 highlight! CursorLine   guibg=#A8A8A0 guifg=bg               ctermbg=230 ctermfg=fg
 highlight! LineNr       guibg=bg      guifg=#505050          ctermbg=bg  ctermfg=239
@@ -42,4 +42,4 @@ highlight! link EndOfBuffer Whitespace
 highlight! link Title IncSearch
 highlight! Directory guibg=NONE guifg=NONE ctermbg=NONE ctermfg=NONE
 
-let g:colors_name = "kawaii"
+let g:colors_name = "fabrique"

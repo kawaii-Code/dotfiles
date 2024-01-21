@@ -34,5 +34,6 @@ xset r rate 115 33
 setxkbmap -option caps:ctrl_modifier
 setxkbmap -layout us,ru -option grp:win_space_toggle
 
+xcompmgr &
 ~/.fehbg &
 i3

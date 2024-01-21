@@ -11,6 +11,9 @@ set autoread
 set ttyfast
 
 set mouse=a
+set timeout
+set ttimeout
+set timeoutlen=300
 set termguicolors
 set showcmd
 set number

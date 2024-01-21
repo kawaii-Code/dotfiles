@@ -21,7 +21,7 @@ options.tabstop = spaces
 options.shiftwidth = spaces
 options.expandtab = true
 
-vim.cmd.colorscheme('kawaii')    
+vim.cmd.colorscheme('fabrique')
 
 map.set('i', '"', '""<ESC>i')
 map.set('i', '[', '[]<ESC>i')
@@ -43,30 +43,17 @@ local Plug = vim.fn['plug#']
 vim.call('plug#begin', '~/.local/share/nvim/plugged')
 
 Plug 'nvim-lua/plenary.nvim'
+Plug 'neovim/nvim-lspconfig'
+Plug 'nvim-treesitter/nvim-treesitter'
 Plug('nvim-telescope/telescope.nvim', {branch = '0.1.x'})
 Plug 'ThePrimeagen/harpoon'
-Plug 'neovim/nvim-lspconfig'
-Plug 'hrsh7th/cmp-nvim-lsp'
-Plug 'hrsh7th/cmp-buffer'
-Plug 'hrsh7th/cmp-cmdline'
-Plug 'hrsh7th/nvim-cmp'
 Plug 'jiangmiao/auto-pairs'
 Plug 'tpope/vim-surround'
 Plug('L3MON4D3/LuaSnip', {['do'] = 'make install_jsregexp'})
 
 vim.call('plug#end')
 
-local telescope_builtin = require('telescope.builtin')
 local actions = require('telescope.actions')
-local function telescope_project_files()
-    local opts = {}
-    vim.fn.system('git rev-parse --is-inside-work-tree')
-    if vim.v.shell_error == 0 then
-        require('telescope.builtin').git_files(opts)
-    else
-        require('telescope.builtin').find_files(opts)
-    end
-end
 local telescope = require('telescope')
 telescope.setup({
     defaults = {
@@ -86,16 +73,32 @@ telescope.setup({
         },
     }
 })
+local function telescope_project_files()
+    local opts = {}
+    vim.fn.system('git rev-parse --is-inside-work-tree')
+    if vim.v.shell_error == 0 then
+        require('telescope.builtin').git_files(opts)
+    else
+        require('telescope.builtin').find_files(opts)
+    end
+end
 map.set('n', '<leader>f', telescope_project_files)
-map.set('n', '<leader>st', telescope_builtin.live_grep)
+map.set('n', '<leader>st', require('telescope.builtin').live_grep)
 
 local harpoonMark = require('harpoon.mark')
 local harpoonUi = require('harpoon.ui')
 map.set('n', '<leader>a', harpoonMark.add_file)
-map.set('n', '<C-j>', function() harpoonUi.nav_file(1) end)
-map.set('n', '<C-k>', function() harpoonUi.nav_file(2) end)
-map.set('n', '<C-l>', function() harpoonUi.nav_file(3) end)
 map.set('n', '<leader>g', harpoonUi.toggle_quick_menu)
+map.set('n', '<leader>1', function() harpoonUi.nav_file(1) end)
+map.set('n', '<leader>2', function() harpoonUi.nav_file(2) end)
+map.set('n', '<leader>3', function() harpoonUi.nav_file(3) end)
+map.set('n', '<leader>4', function() harpoonUi.nav_file(4) end)
+map.set('n', '<leader>5', function() harpoonUi.nav_file(5) end)
+map.set('n', '<leader>6', function() harpoonUi.nav_file(6) end)
+map.set('n', '<leader>7', function() harpoonUi.nav_file(7) end)
+map.set('n', '<leader>8', function() harpoonUi.nav_file(8) end)
+map.set('n', '<leader>9', function() harpoonUi.nav_file(9) end)
+map.set('n', '<leader>0', function() harpoonUi.nav_file(10) end)
 
 
 --
@@ -104,16 +107,14 @@ map.set('n', '<leader>g', harpoonUi.toggle_quick_menu)
 
 
 local lspconfig = require('lspconfig')
-local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
 local function on_attach(event)
     vim.bo[event.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
     local options = {buffer = event.buf}
     map.set('n', 'gd', vim.lsp.buf.definition, options)
+    map.set('n', 'gD', vim.lsp.buf.declaration, options)
     map.set('n', 'gi', vim.lsp.buf.implementation, options)
     map.set('n', 'gr', vim.lsp.buf.references, options)
-    map.set('n', 'gD', vim.lsp.buf.declaration, options)
-    map.set('n', '<leader>D', vim.lsp.buf.type_definition, options)
     map.set('n', 'K', vim.lsp.buf.hover, options)
     map.set('n', '<leader>K', vim.lsp.buf.signature_help, options)
     map.set('n', '<leader>lr', vim.lsp.buf.rename, options)
@@ -126,12 +127,15 @@ vim.api.nvim_create_autocmd('LspAttach', {
     callback = on_attach,
 })
 
-lspconfig.clangd.setup({capabilities = capabilities})
-lspconfig.rust_analyzer.setup({capabilities = capabilities})
-lspconfig.pyright.setup({capabilities = capabilities})
-lspconfig.gopls.setup({capabilities = capabilities})
-lspconfig.zls.setup({capabilities = capabilities})
-lspconfig.lua_ls.setup({
-    capabilities = capabilities,
-    settings = {Lua = {telemetry = {enable = false}}},
+lspconfig.clangd.setup({})
+lspconfig.gopls.setup({})
+lspconfig.lua_ls.setup({})
+
+vim.api.nvim_create_autocmd({'BufEnter', 'BufWinEnter'}, {
+    pattern = { '*.go' },
+    callback = function()
+        options.tabstop = 4
+        options.shiftwidth = 4
+        options.expandtab = false
+    end,
 })

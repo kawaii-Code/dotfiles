@@ -1,5 +1,8 @@
+[window]
+opacity = 0.8
+
 [font]
-size = 20.0
+size = 14.0
 
 [font.normal]
 family = "JetBrainsMonoNL Nerd Font"
@@ -17,12 +20,8 @@ style = "Italic"
 family = "JetBrainsMonoNL Nerd Font"
 style = "Bold Italic"
 
-# Colors (Gruvbox dark)
-
 [colors.primary]
-# hard contrast background = = '#1d2021'
 background = '#111111'
-# soft contrast background = = '#32302f'
 foreground = '#ebdbb2'
 
 [colors.normal]

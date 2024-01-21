@@ -1,12 +1,11 @@
 # i3 config file (v4)
 
-set $mod Mod1
+set $alt Mod1
 set $win Mod4
 
-font pango:JetBrainsMonoNL Nerd Font,JetBrainsMonoNL NF:style=Regular 9
+font pango:JetBrainsMonoNL Nerd Font,JetBrainsMonoNL NF:style=Regular 11
 
-floating_modifier $mod
-
+floating_modifier $alt
 floating_maximum_size 1920x1080
 tiling_drag modifier titlebar
 title_align center
@@ -37,20 +36,30 @@ bar {
         separator_symbol "|"
 }
 
-bindsym $mod+Return exec alacritty
-bindsym $mod+c exec flameshot gui
-bindsym $win+s exec "rofi -modi drun, run -show drun"
+bindsym $alt+Return exec alacritty
+bindsym $alt+r fullscreen toggle
+bindsym $alt+Tab workspace back_and_forth
+bindsym $alt+Shift+space floating toggle
+bindsym $alt+space focus mode_toggle
 
-bindsym $mod+Shift+q kill
-bindsym $mod+Tab workspace back_and_forth
-bindsym $mod+q layout stacking
-bindsym $mod+w layout tabbed
-bindsym $mod+e layout toggle split
-bindsym $mod+r fullscreen toggle
-bindsym $mod+Shift+space floating toggle
-bindsym $mod+space focus mode_toggle
-bindsym $mod+Shift+c reload
+bindsym $win+c      exec flameshot gui
+bindsym $win+s      exec "rofi -modi drun, run -show drun"
 bindsym $win+period exec rofimoji
+bindsym $win+o      exec "alacritty --class='oneshot,oneshot'\
+                                    --config-file=$HOME/.config/alacritty/oneshot.toml\
+                                    --working-directory=$HOME/org\
+                                    -e bash --rcfile $HOME/org/orgrc"
+for_window [class="oneshot"] floating enable
+for_window [class="oneshot"] resize set 1200 800
+for_window [class="oneshot"] move position center
+
+bindsym $win+q kill
+bindsym $win+j move scratchpad
+bindsym $win+k scratchpad show
+# bindsym $alt+q layout stacking
+bindsym $win+w layout tabbed
+bindsym $win+e layout toggle split
+bindsym $win+Shift+c reload
 
 set $resize_mode "Resize: h, j, k, l"
 bindsym $win+r mode $resize_mode
@@ -67,15 +76,15 @@ mode $resize_rode {
 
         bindsym Return mode "default"
         bindsym Escape mode "default"
-        bindsym $mod+q mode "default"
+        bindsym $alt+q mode "default"
 }
 
 set $system_mode "System: [s]uspend, [r]eboot, [p]oweroff, [e]xit i3"
-bindsym $win+e mode $system_mode
+bindsym $win+x mode $system_mode
 mode $system_mode {
         bindsym s exec --no-startup-id systemctl suspend; mode "default"
         bindsym r exec --no-startup-id systemctl reboot;
-        bindsym p exec --no-startup-id poweroff;
+        bindsym p exec --no-startup-id systemctl poweroff;
         bindsym e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"; mode "default"
 
         bindsym Return mode "default"
@@ -83,25 +92,23 @@ mode $system_mode {
         bindsym $win+e mode "default"
 }
 
-bindsym $mod+h focus left
-bindsym $mod+j focus down
-bindsym $mod+k focus up
-bindsym $mod+l focus right
+bindsym $alt+h focus left
+bindsym $alt+j focus down
+bindsym $alt+k focus up
+bindsym $alt+l focus right
+bindsym $alt+Left focus left
+bindsym $alt+Down focus down
+bindsym $alt+Up focus up
+bindsym $alt+Right focus right
 
-bindsym $mod+Left focus left
-bindsym $mod+Down focus down
-bindsym $mod+Up focus up
-bindsym $mod+Right focus right
-
-bindsym $mod+Shift+h move left
-bindsym $mod+Shift+j move down
-bindsym $mod+Shift+k move up
-bindsym $mod+Shift+l move right
-
-bindsym $mod+Shift+Left move left
-bindsym $mod+Shift+Down move down
-bindsym $mod+Shift+Up move up
-bindsym $mod+Shift+Right move right
+bindsym $alt+Shift+h move left
+bindsym $alt+Shift+j move down
+bindsym $alt+Shift+k move up
+bindsym $alt+Shift+l move right
+bindsym $alt+Shift+Left move left
+bindsym $alt+Shift+Down move down
+bindsym $alt+Shift+Up move up
+bindsym $alt+Shift+Right move right
 
 set $ws1 "1"
 set $ws2 "2"
@@ -114,24 +121,45 @@ set $ws8 "8"
 set $ws9 "9"
 set $ws10 "10"
 
-bindsym $mod+1 workspace number $ws1
-bindsym $mod+2 workspace number $ws2
-bindsym $mod+3 workspace number $ws3
-bindsym $mod+4 workspace number $ws4
-bindsym $mod+5 workspace number $ws5
-bindsym $mod+6 workspace number $ws6
-bindsym $mod+7 workspace number $ws7
-bindsym $mod+8 workspace number $ws8
-bindsym $mod+9 workspace number $ws9
-bindsym $mod+0 workspace number $ws10
+bindsym $alt+1 workspace number $ws1
+bindsym $alt+2 workspace number $ws2
+bindsym $alt+3 workspace number $ws3
+bindsym $alt+4 workspace number $ws4
+bindsym $alt+5 workspace number $ws5
+bindsym $alt+6 workspace number $ws6
+bindsym $alt+7 workspace number $ws7
+bindsym $alt+8 workspace number $ws8
+bindsym $alt+9 workspace number $ws9
+bindsym $alt+0 workspace number $ws10
 
-bindsym $mod+Shift+1 move container to workspace number $ws1
-bindsym $mod+Shift+2 move container to workspace number $ws2
-bindsym $mod+Shift+3 move container to workspace number $ws3
-bindsym $mod+Shift+4 move container to workspace number $ws4
-bindsym $mod+Shift+5 move container to workspace number $ws5
-bindsym $mod+Shift+6 move container to workspace number $ws6
-bindsym $mod+Shift+7 move container to workspace number $ws7
-bindsym $mod+Shift+8 move container to workspace number $ws8
-bindsym $mod+Shift+9 move container to workspace number $ws9
-bindsym $mod+Shift+0 move container to workspace number $ws10
+bindsym $alt+Shift+1 move container to workspace number $ws1
+bindsym $alt+Shift+2 move container to workspace number $ws2
+bindsym $alt+Shift+3 move container to workspace number $ws3
+bindsym $alt+Shift+4 move container to workspace number $ws4
+bindsym $alt+Shift+5 move container to workspace number $ws5
+bindsym $alt+Shift+6 move container to workspace number $ws6
+bindsym $alt+Shift+7 move container to workspace number $ws7
+bindsym $alt+Shift+8 move container to workspace number $ws8
+bindsym $alt+Shift+9 move container to workspace number $ws9
+bindsym $alt+Shift+0 move container to workspace number $ws10
+
+set $music    "mu"
+set $second   "ds"
+set $explorer "ex"
+set $fourth   "og"
+set $discord  "ds"
+
+bindsym $win+1 workspace $music
+bindsym $win+2 workspace $second
+bindsym $win+3 workspace $explorer
+bindsym $win+4 workspace $fourth
+bindsym $win+5 workspace $discord
+
+bindsym $win+Shift+1 move container to workspace $music
+bindsym $win+Shift+2 move container to workspace $second
+bindsym $win+Shift+3 move container to workspace $explorer
+bindsym $win+Shift+4 move container to workspace $fourth
+bindsym $win+Shift+5 move container to workspace $discord
+
+for_window [class="discord"] move container to workspace $discord
+for_window [class="firefox"] move container to workspace number $ws2
