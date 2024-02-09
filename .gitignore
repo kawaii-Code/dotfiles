@@ -2,5 +2,8 @@ syncthing/
 systemd/
 tmux/plugins/
 
+.config/nvim/spell
+.vim/spell
+
 alacritty_example.yml
 .luarc.json

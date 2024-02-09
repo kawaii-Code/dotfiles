@@ -1,4 +1,9 @@
-source ~/.vim/distractionfree.vim
+" Take a quick note and save it with an auto-generated
+" file name based on the title.
+
+call modes#distractionfree()
+call modes#quicksession()
+call modes#plaintext()
 
 0r ~/.vim/notetemplate.txt
 

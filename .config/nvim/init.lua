@@ -130,12 +130,3 @@ vim.api.nvim_create_autocmd('LspAttach', {
 lspconfig.clangd.setup({})
 lspconfig.gopls.setup({})
 lspconfig.lua_ls.setup({})
-
-vim.api.nvim_create_autocmd({'BufEnter', 'BufWinEnter'}, {
-    pattern = { '*.go' },
-    callback = function()
-        options.tabstop = 4
-        options.shiftwidth = 4
-        options.expandtab = false
-    end,
-})

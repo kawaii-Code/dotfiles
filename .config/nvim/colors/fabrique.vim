@@ -1,6 +1,6 @@
 highlight! clear 
 
-highlight! Normal guibg=#1C1C1C guifg=#EBDBB2 ctermbg=0 ctermfg=0
+highlight! Normal guibg=#111111 guifg=#EBDBB2 ctermbg=0 ctermfg=0
 highlight! Visual guibg=fg      guifg=bg      ctermbg=0   ctermfg=0
 
 " Code
@@ -12,9 +12,9 @@ highlight! String     guibg=NONE    guifg=#98BB6C ctermfg=180 ctermbg=NONE
 highlight! Identifier guibg=NONE    guifg=NONE    ctermfg=180 ctermbg=NONE
 highlight! Statement  guibg=NONE    guifg=#EBC06D ctermbg=bg  ctermfg=fg
 highlight! PreProc    guibg=NONE    guifg=#AEAE9E ctermbg=bg  ctermfg=fg
-highlight! Constant   guibg=NONE    guifg=NONE    ctermfg=233 ctermbg=bg 
+highlight! Constant   guibg=NONE    guifg=NONE    ctermfg=233 ctermbg=bg
 highlight! Operator   guibg=NONE    guifg=#AEAE9E ctermfg=180 ctermbg=NONE
-highlight! Todo       guibg=#505050 guifg=fg      ctermfg=180 ctermbg=NONE
+highlight! Todo       guibg=bg      guifg=fg      ctermfg=fg  ctermbg=bg gui=bold cterm=bold term=standout
 highlight! link Function Statement
 
 " Vim
@@ -41,5 +41,11 @@ highlight! link EndOfBuffer Whitespace
 
 highlight! link Title IncSearch
 highlight! Directory guibg=NONE guifg=NONE ctermbg=NONE ctermfg=NONE
+
+" Retrobox
+highlight! SpecialKey guifg=#928374
+highlight! Error      guifg=#1c1c1c guibg=#fb4934
+
+highlight! link ErrorMsg Error
 
 let g:colors_name = "fabrique"

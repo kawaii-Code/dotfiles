@@ -13,13 +13,14 @@ smart_borders on
 
 set $background #292522
 set $foreground #ECE1D7
-set $gray0 #111111
+set $gray0 #121212
 set $gray1 #222222
 set $gray2 #403A36
-set $gray3 #888888
+set $gray3 #928374
 
 # class                 border  backgr.     text        indicator   child_border
 client.focused          $gray2  $background $foreground $foreground $background
+client.focused_inactive $gray1  $gray0      $gray3      $gray3      $gray0
 client.unfocused        $gray1  $gray0      $gray3      $gray3      $gray0
 
 bar {
@@ -32,7 +33,7 @@ bar {
                 inactive_workspace $gray0 $gray0 $gray3
         }
         position top
-        status_command i3status
+        status_command "$HOME/app/i3statusmod"
         separator_symbol "|"
 }
 
@@ -49,9 +50,20 @@ bindsym $win+o      exec "alacritty --class='oneshot,oneshot'\
                                     --config-file=$HOME/.config/alacritty/oneshot.toml\
                                     --working-directory=$HOME/org\
                                     -e bash --rcfile $HOME/org/orgrc"
+bindsym $win+n      exec "alacritty --class='sticky,sticky'\
+                                    --config-file=$HOME/.config/alacritty/oneshot.toml\
+                                    -e $HOME/app/q"
+bindsym $win+t      exec "alacritty --class='oneshot,oneshot'\
+                                    --config-file=$HOME/.config/alacritty/oneshot.toml\
+                                    --working-directory=$HOME/org\
+                                    -e vim todo.txt"
+
 for_window [class="oneshot"] floating enable
 for_window [class="oneshot"] resize set 1200 800
 for_window [class="oneshot"] move position center
+for_window [class="sticky"] floating enable
+for_window [class="sticky"] resize set 500 700
+for_window [class="sticky"] sticky enable
 
 bindsym $win+q kill
 bindsym $win+j move scratchpad
@@ -162,4 +174,7 @@ bindsym $win+Shift+4 move container to workspace $fourth
 bindsym $win+Shift+5 move container to workspace $discord
 
 for_window [class="discord"] move container to workspace $discord
+for_window [class="Zathura"] move container to workspace number $ws2
 for_window [class="firefox"] move container to workspace number $ws2
+for_window [class="mpv"] floating enable
+for_window [class="unityhub"] floating enable
