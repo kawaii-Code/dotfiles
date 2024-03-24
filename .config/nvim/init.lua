@@ -23,7 +23,7 @@ options.expandtab = true
 
 vim.cmd.colorscheme('fabrique')
 
-map.set('i', '"', '""<ESC>i')
+map.set('i', '""<ESC>i', '"')
 map.set('i', '[', '[]<ESC>i')
 map.set('i', '{', '{}<ESC>i')
 map.set('n', '>', '>>')
@@ -32,6 +32,9 @@ map.set('n', '<leader>h', '<CMD>nohlsearch<CR>')
 map.set('n', '<leader>d', vim.diagnostic.open_float)
 map.set('n', '<leader>dn', vim.diagnostic.goto_next)
 map.set('n', '<leader>dp', vim.diagnostic.goto_prev)
+map.set('n', 'J', '}')
+map.set('n', 'K', '{')
+map.set('n', '<F1>', 'K')
 
 
 --
@@ -49,9 +52,13 @@ Plug('nvim-telescope/telescope.nvim', {branch = '0.1.x'})
 Plug 'ThePrimeagen/harpoon'
 Plug 'jiangmiao/auto-pairs'
 Plug 'tpope/vim-surround'
+Plug 'AndrewRadev/sideways.vim'
 Plug('L3MON4D3/LuaSnip', {['do'] = 'make install_jsregexp'})
 
 vim.call('plug#end')
+
+map.set('n', '<c-h>', "<CMD>SidewaysLeft<cr>")
+map.set('n', '<c-l>', "<CMD>SidewaysRight<cr>")
 
 local actions = require('telescope.actions')
 local telescope = require('telescope')
@@ -59,8 +66,7 @@ telescope.setup({
     defaults = {
         mappings = {
             i = {
-                ['<C-k>'] = actions.move_selection_previous,
-                ['<C-j>'] = actions.move_selection_next,
+                ['<C-j>'] = actions.select_default,
                 ['<C-h>'] = 'which_key',
                 ['<Esc>'] = actions.close,
             },

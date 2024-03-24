@@ -48,19 +48,25 @@ notify() {
 # A timer that shows on i3 status bar. The heavy
 # lifting is done by a custom script.
 timer() {
-    if [ $# -lt 2 ]; then
-        echo "timer: please specify a message"
-        return -1
-    fi
+    echo $* | nc -NU "/tmp/timer.sock"
 
-    local N=$1;
-    shift
+    #if [ $# -lt 2 ]; then
+    #    echo "timer: please specify a message"
+    #    return -1
+    #fi
 
-    printf "$(date "+%Y-%m-%d %H:%M")\t$N $*\n" >> ~/org/timerlog.txt
+    #local N=$1;
+    #shift
 
-    ("$HOME/app/pipetimer" $N $* && notify -t 30000 -s "$HOME/res/32-Music/_/save-heaven.flac" "Time's up: $*" &)
+    #printf "$(date "+%Y-%m-%d %H:%M")\t$N $*\n" >> ~/org/timerlog.txt
 
-    echo "timer set for $N"
+    #("$HOME/app/pipetimer" $N $* && notify -t 30000 -s "$HOME/res/32-Music/_/save-heaven.flac" "Time's up: $*" &)
+
+    #echo "timer set for $N"
+}
+
+track() {
+    echo "track" $* | nc -NU "/tmp/timer.sock"
 }
 
 c() {

@@ -156,25 +156,28 @@ bindsym $alt+Shift+9 move container to workspace number $ws9
 bindsym $alt+Shift+0 move container to workspace number $ws10
 
 set $music    "mu"
-set $second   "ds"
+set $notes    "nt"
 set $explorer "ex"
 set $fourth   "og"
 set $discord  "ds"
 
 bindsym $win+1 workspace $music
-bindsym $win+2 workspace $second
+bindsym $win+2 workspace $notes
 bindsym $win+3 workspace $explorer
 bindsym $win+4 workspace $fourth
 bindsym $win+5 workspace $discord
 
-bindsym $win+Shift+1 move container to workspace $music
-bindsym $win+Shift+2 move container to workspace $second
+bindsym $win+Shift+1 move container to workspace $musc
+bindsym $win+Shift+2 move container to workspace $notes
 bindsym $win+Shift+3 move container to workspace $explorer
 bindsym $win+Shift+4 move container to workspace $fourth
 bindsym $win+Shift+5 move container to workspace $discord
 
+for_window [class="tiny-heroes"] floating enable
 for_window [class="discord"] move container to workspace $discord
 for_window [class="Zathura"] move container to workspace number $ws2
 for_window [class="firefox"] move container to workspace number $ws2
 for_window [class="mpv"] floating enable
 for_window [class="unityhub"] floating enable
+for_window [class="qemu"] floating enable
+for_window [class="QEMU"] floating enable
