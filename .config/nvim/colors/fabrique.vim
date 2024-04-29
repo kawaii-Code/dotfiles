@@ -5,7 +5,7 @@
 " Yellow              #EBC06D
 " Red                 #FB4444
 " Green               #88BB66
-" Dark Gray           #2A2A2A
+" Dark Gray           #2A2A2A (#202020)
 " Gray                #887766
 " Light Gray          #AEAE9E
 
@@ -16,7 +16,7 @@ highlight! Visual     guibg=fg   guifg=#2A2A2A
 
 " Code
 highlight! Comment    guibg=NONE guifg=#887766
-highlight! Whitespace guibg=NONE guifg=#2A2A2A
+highlight! Whitespace guibg=NONE guifg=#202020
 highlight! Type       guibg=NONE guifg=#AEAE9E gui=bold
 highlight! String     guibg=NONE guifg=#88BB66
 highlight! Special    guibg=NONE guifg=#EBC06D
