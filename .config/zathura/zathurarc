@@ -1,3 +1,5 @@
+set database sqlite
+
 set notification-error-bg       "#282828" # bg
 set notification-error-fg       "#fb4934" # bright:red
 set notification-warning-bg     "#282828" # bg
@@ -24,8 +26,8 @@ set inputbar-fg                 "#ebdbb2" # fg
 set statusbar-bg                "#504945" # bg2
 set statusbar-fg                "#ebdbb2" # fg
 
-set highlight-color             "#fabd2f" # bright:yellow
-set highlight-active-color      "#fe8019" # bright:orange
+#set highlight-color             "#fabd2f" # bright:yellow
+#set highlight-active-color      "#fe8019" # bright:orange
 
 set default-bg                  "#282828" # bg
 set default-fg                  "#ebdbb2" # fg
@@ -38,3 +40,7 @@ set recolor-lightcolor          "#282828" # bg
 set recolor-darkcolor           "#ebdbb2" # fg
 set recolor                     "true"
 # set recolor-keephue             true      # keep original color
+
+set scroll-step 60.0
+
+set recolor false

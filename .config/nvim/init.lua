@@ -1,119 +1,140 @@
+-- Import options from Vim
+vim.cmd.source('~/.vimrc')
+
+-- Some overrides for Neovim
 local options = vim.opt
-local map = vim.keymap
-
-vim.g.mapleader = ' '
-
-options.termguicolors = true
-options.fileencodings = 'ucs-bom,utf-8,cp1251,default,latin1'
-options.langmap = 'йЙцЦуУкКеЕнНгГшШщЩзЗхХъЪфФыЫвВаАпПрРоОлЛдДжЖэЭяЯчЧсСмМиИтТьЬбБюЮ\\,;qQwWeErRtTyYuUiIoOpP[{]}aAsSdDfFgGhHjJkKlL;:\'"zZxXcCvVbBnNmM\\,<.>?'
-
-options.mouse = 'a'
-options.number = true
-options.relativenumber = true
-options.list = true
 options.listchars = {tab='» ', space='·'}
-options.wrap = false
-options.scrolloff = 8
-options.colorcolumn = '80'
 
-local spaces = 4
-options.tabstop = spaces
-options.shiftwidth = spaces
-options.expandtab = true
-
+-- Better than retrobox 😳
 vim.cmd.colorscheme('fabrique')
 
-map.set('i', '""<ESC>i', '"')
-map.set('i', '[', '[]<ESC>i')
-map.set('i', '{', '{}<ESC>i')
-map.set('n', '>', '>>')
-map.set('n', '<', '<<')
-map.set('n', '<leader>h', '<CMD>nohlsearch<CR>')
+-- This doesn't work in Vim
+-- nnoremap <C-CR> o<ESC>
+-- nnoremap <C-S-CR> O<ESC>
+
+local map = vim.keymap
 map.set('n', '<leader>d', vim.diagnostic.open_float)
 map.set('n', '<leader>dn', vim.diagnostic.goto_next)
 map.set('n', '<leader>dp', vim.diagnostic.goto_prev)
-map.set('n', 'J', '}')
-map.set('n', 'K', '{')
-map.set('n', '<F1>', 'K')
+vim.diagnostic.disable()
 
-
---
--- Plugins
---
-
+-- Plugin options
+vim.cmd('let g:sneak#use_ic_scs = 1')
+vim.cmd("let g:vimtex_view_method = 'zathura'")
+vim.cmd('let g:ultisnipsExpandTrigger="<tab>"')
+vim.cmd('let g:ultisnipsJumpForwardTrigger="<c-b>"')
+vim.cmd('let g:ultisnipsJumpBackwardTrigger="<c-z>"')
 
 local Plug = vim.fn['plug#']
-vim.call('plug#begin', '~/.local/share/nvim/plugged')
+vim.call('plug#begin')
 
-Plug 'nvim-lua/plenary.nvim'
 Plug 'neovim/nvim-lspconfig'
-Plug 'nvim-treesitter/nvim-treesitter'
+Plug 'nvim-lua/plenary.nvim'
 Plug('nvim-telescope/telescope.nvim', {branch = '0.1.x'})
 Plug 'ThePrimeagen/harpoon'
-Plug 'jiangmiao/auto-pairs'
+
+Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
-Plug 'AndrewRadev/sideways.vim'
-Plug('L3MON4D3/LuaSnip', {['do'] = 'make install_jsregexp'})
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-speeddating'
+Plug 'tpope/vim-eunuch'
+Plug 'justinmk/vim-sneak'
+
+Plug 'lervag/vimtex'
+
+Plug 'sirver/ultisnips'
+Plug 'quangnguyen30192/cmp-nvim-ultisnips'
+Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'hrsh7th/nvim-cmp'
+
+Plug 'kshenoy/vim-signature'
+Plug 'terryma/vim-expand-region'
 
 vim.call('plug#end')
 
-map.set('n', '<c-h>', "<CMD>SidewaysLeft<cr>")
-map.set('n', '<c-l>', "<CMD>SidewaysRight<cr>")
+-- Plugins
+
+vim.cmd.highlight('link Sneak IncSearch')
 
 local actions = require('telescope.actions')
+local builtin = require('telescope.builtin')
 local telescope = require('telescope')
-telescope.setup({
+telescope.setup {
     defaults = {
         mappings = {
             i = {
                 ['<C-j>'] = actions.select_default,
-                ['<C-h>'] = 'which_key',
                 ['<Esc>'] = actions.close,
             },
         },
         file_ignore_patterns = {
-            'bin',
-            'obj',
-            'dependencies',
-            'vendor'
+            '.git/',
+            'bin/',
+            'build/',
+            'lib/',
         },
+    },
+}
+map.set('n', '<leader>f', function() builtin.fd { follow = true } end)
+map.set('n', '<leader>st', builtin.live_grep)
+
+local mark = require('harpoon.mark')
+local ui = require('harpoon.ui')
+map.set('n', '<leader>a', mark.add_file)
+map.set('n', '<leader>g', ui.toggle_quick_menu)
+map.set('n', '<leader>1', function() ui.nav_file(1) end)
+map.set('n', '<leader>2', function() ui.nav_file(2) end)
+map.set('n', '<leader>3', function() ui.nav_file(3) end)
+map.set('n', '<leader>4', function() ui.nav_file(4) end)
+map.set('n', '<leader>5', function() ui.nav_file(5) end)
+map.set('n', '<leader>6', function() ui.nav_file(6) end)
+map.set('n', '<leader>7', function() ui.nav_file(7) end)
+map.set('n', '<leader>8', function() ui.nav_file(8) end)
+map.set('n', '<leader>9', function() ui.nav_file(9) end)
+map.set('n', '<leader>0', function() ui.nav_file(10) end)
+
+local cmp = require('cmp')
+cmp.setup {
+    completion = {
+        autocomplete = false
+    },
+    snippet = {
+        expand = function(args)
+            vim.fn['UltiSnips#Anon'](args.body)
+        end
+    },
+    mapping = {
+        ['<C-Space>'] = cmp.mapping.complete(),
+        ['<C-e>'] = cmp.mapping.abort(),
+        ['<CR>'] = cmp.mapping.confirm { select = true },
+        ['<C-n>'] = cmp.mapping({
+            i = function(fallback)
+                if cmp.visible() then
+                    cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
+                else
+                    fallback()
+                end
+            end
+        }),
+        ['<C-p>'] = cmp.mapping({
+            i = function(fallback)
+                if cmp.visible() then
+                    cmp.select_prev_item({ behavior = cmp.SelectBehavior.Select })
+                else
+                    fallback()
+                end
+            end
+        }),
+    },
+    sources = {
+        { name = 'nvim_lsp' },
+        { name = 'ultisnips' },
     }
-})
-local function telescope_project_files()
-    local opts = {}
-    vim.fn.system('git rev-parse --is-inside-work-tree')
-    if vim.v.shell_error == 0 then
-        require('telescope.builtin').git_files(opts)
-    else
-        require('telescope.builtin').find_files(opts)
-    end
-end
-map.set('n', '<leader>f', telescope_project_files)
-map.set('n', '<leader>st', require('telescope.builtin').live_grep)
+}
 
-local harpoonMark = require('harpoon.mark')
-local harpoonUi = require('harpoon.ui')
-map.set('n', '<leader>a', harpoonMark.add_file)
-map.set('n', '<leader>g', harpoonUi.toggle_quick_menu)
-map.set('n', '<leader>1', function() harpoonUi.nav_file(1) end)
-map.set('n', '<leader>2', function() harpoonUi.nav_file(2) end)
-map.set('n', '<leader>3', function() harpoonUi.nav_file(3) end)
-map.set('n', '<leader>4', function() harpoonUi.nav_file(4) end)
-map.set('n', '<leader>5', function() harpoonUi.nav_file(5) end)
-map.set('n', '<leader>6', function() harpoonUi.nav_file(6) end)
-map.set('n', '<leader>7', function() harpoonUi.nav_file(7) end)
-map.set('n', '<leader>8', function() harpoonUi.nav_file(8) end)
-map.set('n', '<leader>9', function() harpoonUi.nav_file(9) end)
-map.set('n', '<leader>0', function() harpoonUi.nav_file(10) end)
-
-
---
--- LSP
---
-
+local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
 local lspconfig = require('lspconfig')
-
 local function on_attach(event)
     vim.bo[event.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
     local options = {buffer = event.buf}
@@ -121,18 +142,14 @@ local function on_attach(event)
     map.set('n', 'gD', vim.lsp.buf.declaration, options)
     map.set('n', 'gi', vim.lsp.buf.implementation, options)
     map.set('n', 'gr', vim.lsp.buf.references, options)
-    map.set('n', 'K', vim.lsp.buf.hover, options)
-    map.set('n', '<leader>K', vim.lsp.buf.signature_help, options)
+    map.set('n', '<F1>', vim.lsp.buf.hover, options)
     map.set('n', '<leader>lr', vim.lsp.buf.rename, options)
     map.set({'n', 'v'}, '<leader>la', vim.lsp.buf.code_action, options)
 end
-
-local group = vim.api.nvim_create_augroup('UserLspConfig', {})
 vim.api.nvim_create_autocmd('LspAttach', {
-    group = group,
     callback = on_attach,
 })
 
-lspconfig.clangd.setup({})
-lspconfig.gopls.setup({})
-lspconfig.lua_ls.setup({})
+lspconfig.lua_ls.setup {capabilities = capabilities}
+lspconfig.clangd.setup {capabilities = capabilities}
+lspconfig.gopls.setup {capabilities = capabilities}

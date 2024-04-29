@@ -1,30 +1,32 @@
-" Options that fit any type of file.
-" There is more configuration in ~/.vim
-
-set nocompatible
+set number
+set relativenumber
+set hidden
+set mouse=a
 set belloff=all
+set showcmd
 set wildmenu
 set autoread
-set ttyfast
+set scrolloff=8
+set termguicolors
+set backspace=indent,eol,start
+set noswapfile
+set wildignore=*.o
 
 " Sensible search options
 set hlsearch
 set ignorecase
 set incsearch
 
-set number
-set relativenumber
-
-set hidden
-set mouse=a
-set showcmd
+" In visual block editing the cursor can move freely
+" around the terminal, not limited by the text.
 set virtualedit=block
-set backspace=indent,eol,start
-set termguicolors
-set scrolloff=8
-set nowrap
 
-" I made that myself... That was long...
+" People should just use utf8.
+"
+" I do not remember why encodings are listed like that,
+" but it makes windows cyrillic encoding work
+set fileencodings=ucs-bom,utf-8,cp1251,default,latin1
+
 set langmap=ю.,б\\,,ж\\;,ьm,тn,иb,мv,сc,чx,яz,э',дl,лk,оj,рh,пg,аf,вd,ыs,фa,ъ],х[,зp,щo,шi,гu,нy,еt,кr,уe,цw,йq,ё`,Ю>,Б<,ЬM,ТN,ИB,МV,СC,ЧX,ЯZ,Э\\",Ж:,ДL,ЛK,ОJ,РH,ПG,АF,ВD,ЫS,ФA,Ъ},Х{,ЗP,ЩO,ШI,ГU,НY,ЕT,КR,УE,ЦW,Й~,ЁQ
 
 " Show different hidden characters
@@ -32,6 +34,8 @@ set list
 set listchars=tab:»\ ,trail:`
 set showbreak=>\ 
 
+set nowrap
+set smarttab
 set tabstop=4
 set shiftwidth=4
 set expandtab
@@ -53,12 +57,27 @@ set ttimeout
 set timeoutlen=500
 set ttimeoutlen=50
 
+" Those were removed from Neovim
+set nocompatible
+set ttyfast
+
+
+
 filetype plugin indent on
 syntax on
 
-" The best colorscheme ever <3
 set background=dark
-colorscheme retrobox
+if !has('nvim')
+    " The best colorscheme ever <3
+    " Neovim doesn't have it. Boo!
+    colorscheme retrobox
+end
+" Use Terminal colors
+highlight! Normal guibg=NONE guifg=NONE
+
+
+
+let g:mapleader=' '
 
 " Repeat macro in 'q' register
 "
@@ -72,8 +91,14 @@ autocmd BufReadPost quickfix nnoremap <CR> <CR>
 noremap J }
 noremap K {
 
+nnoremap < <<
+nnoremap > >>
+
 " Remap docs to F1, since K was taken
 nnoremap <F1> K
+nnoremap <F2> :call utils#renameword()<CR>
+nnoremap <F3> /^
+nnoremap <F6> :call utils#togglelighttheme()<CR>
 
 " Quick buffer switching
 noremap <leader>1 :b1<CR>
@@ -86,18 +111,4 @@ noremap <leader>7 :b7<CR>
 noremap <leader>8 :b8<CR>
 noremap <leader>9 :b9<CR>
 
-" Emacs bindings for cmdline.
-execute "set <M-f>=\ef"
-execute "set <M-b>=\eb"
-cnoremap <M-f> <C-Right>
-cnoremap <M-b> <C-Left>
-cnoremap <C-d> <Delete>
-cnoremap <C-b> <Left>
-cnoremap <C-f> <Right>
-cnoremap <C-a> <Home>
-cnoremap <C-e> <End>
-
-let g:mapleader=' '
-nnoremap < <<
-nnoremap > >>
-nnoremap <leader>h :nohl<CR>
+nnoremap <leader>h :nohlsearch<CR>

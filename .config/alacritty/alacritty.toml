@@ -17,6 +17,12 @@ style = "Italic"
 family = "JetBrainsMonoNL Nerd Font"
 style = "Bold Italic"
 
+# Allow Shift + Enter in Vim
+[[keyboard.bindings]]
+chars = "\u001B[13;2u"
+key = "Return"
+mods = "Shift"
+
 # Colors (Gruvbox dark)
 
 [colors.primary]

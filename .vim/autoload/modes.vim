@@ -2,7 +2,7 @@
 " but also cannot be put in global config.
 
 " Use `q` to exit Vim, Q to save and exit, etc.
-" Useful for extremely quick edits.
+" Useful for quick edits.
 function! modes#quicksession()
     nnoremap <silent> E     :E<CR>
     nnoremap <silent> q     :qa<CR>
@@ -16,15 +16,18 @@ function! modes#plaintext()
     setlocal wrap
     setlocal textwidth=0
     setlocal colorcolumn=
+
+    " Show wrapped lines
     setlocal linebreak
     setlocal showbreak=>\ 
 
+    " Tabs are way cooler in text files
     setlocal noexpandtab
     setlocal shiftwidth=8
     setlocal tabstop=8
 
     " Undo by sentence chunks. When a bunch of text is typed,
-    " `u` won't undo the text, but rather till the below characters.
+    " `u` won't undo the whole text, but rather chunks of it.
     "
     " :h i_CTRL-G_u
     "
@@ -58,8 +61,6 @@ endfunction
 "
 " credits: https://zserge.com/posts/vim-distraction-free/
 function! modes#distractionfree()
-    call modes#quicksession()
-
     let width = winwidth('%') * 0.7
     let height = 0.8
 
