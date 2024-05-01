@@ -61,6 +61,10 @@ bindsym $win+t      exec "alacritty --class='oneshot,oneshot'\
 for_window [class="oneshot"] floating enable
 for_window [class="oneshot"] resize set 1200 800
 for_window [class="oneshot"] move position center
+
+for_window [class="chk"] floating enable
+for_window [class="chk"] sticky enable
+
 for_window [class="sticky"] floating enable
 for_window [class="sticky"] resize set 500 700
 for_window [class="sticky"] sticky enable
@@ -68,6 +72,7 @@ for_window [class="sticky"] sticky enable
 bindsym $win+q kill
 bindsym $win+j move scratchpad
 bindsym $win+k scratchpad show
+bindsym $win+h exec checklist
 # bindsym $alt+q layout stacking
 bindsym $win+w layout tabbed
 bindsym $win+e layout toggle split

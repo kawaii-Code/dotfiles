@@ -153,3 +153,4 @@ vim.api.nvim_create_autocmd('LspAttach', {
 lspconfig.lua_ls.setup {capabilities = capabilities}
 lspconfig.clangd.setup {capabilities = capabilities}
 lspconfig.gopls.setup {capabilities = capabilities}
+lspconfig.zls.setup {capabilities = capabilities}
