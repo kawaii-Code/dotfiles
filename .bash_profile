@@ -1,11 +1,9 @@
-[[ -f ~/.bashrc ]] && . ~/.bashrc
+[[ -f "$HOME/.bashrc" ]] && . "$HOME/.bashrc"
 
 export CDPATH=.:$HOME:..
-export PATH=$HOME/app:$PATH
+export PATH="$HOME/app:$HOME/opt/ruby/bin:$HOME/bin:$HOME/.local/bin:$PATH:/sbin:$HOME/bin/hare/bin"
 
 export EDITOR=vim
 export VISUAL=$EDITOR
 
-export PYTHONSTARTUP="$HOME/.pythonrc.py"
-export GOPATH="$HOME/.go"
 export LESS='-iMRSj.5'
